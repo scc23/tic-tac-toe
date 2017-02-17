@@ -9,6 +9,8 @@
 # Choice of who goes first (X or O)
 ################################################################################
 
+import numpy
+
 # function to reset the game board
 def resetBoard(board):
     print("___________________")
@@ -136,10 +138,29 @@ def checkWin(board):
     else:
         return False
 
-
 # function for AI
 # alpha-beta pruning minimax
 # http://catarak.github.io/blog/2015/01/07/solving-tic-tac-toe/
+
+numberOfPossibleWins = 8
+winningPositions = numpy.array( [ [1,2,3],[4,5,6],[7,8,9],[7,4,1],[8,5,2],[9,6,3],[7,5,3],[1,5,9] ] )
+
+def minimax(board, alpha, beta, depth, limit):
+    if checkWin(board) || checkTie(board):
+        score = evaluateScore(board)
+        return score
+    
+    # maximizer
+    if player == "AI":
+        bestScore = float("-inf")
+
+    # minimizer
+    else:
+
+
+
+
+
 
 # ---------------------------------------------------------------------------
 # initial settings for game board
