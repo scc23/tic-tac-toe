@@ -81,58 +81,42 @@ def checkWin(board):
     # check if player 1 (X) has won
     # horizontals
     if board[7] == "X" and board[8] == "X" and board[9] == "X":
-        print("Player 1 wins!")
         return True
     elif board[4] == "X" and board[5] == "X" and board[6] == "X":
-        print("Player 1 wins!")
         return True
     elif board[1] == "X" and board[2] == "X" and board[3] == "X":
-        print("Player 1 wins!")
         return True
     # verticals
     elif board[7] == "X" and board[4] == "X" and board[1] == "X":
-        print("Player 1 wins!")
         return True
     elif board[8] == "X" and board[5] == "X" and board[2] == "X":
-        print("Player 1 wins!")
         return True
     elif board[9] == "X" and board[6] == "X" and board[3] == "X":
-        print("Player 1 wins!")
         return True
     # diagonals
     elif board[7] == "X" and board[5] == "X" and board[3] == "X":
-        print("Player 1 wins!")
         return True
     elif board[1] == "X" and board[5] == "X" and board[9] == "X":
-        print("Player 1 wins!")
         return True
     # check if player 2 (O) has won
     # horizontals
     if board[7] == "O" and board[8] == "O" and board[9] == "O":
-        print("Player 2 wins!")
         return True
     elif board[4] == "O" and board[5] == "O" and board[6] == "O":
-        print("Player 2 wins!")
         return True
     elif board[1] == "O" and board[2] == "O" and board[3] == "O":
-        print("Player 2 wins!")
         return True
     # verticals
     elif board[7] == "O" and board[4] == "O" and board[1] == "O":
-        print("Player 2 wins!")
         return True
     elif board[8] == "O" and board[5] == "O" and board[2] == "O":
-        print("Player 2 wins!")
         return True
     elif board[9] == "O" and board[6] == "O" and board[3] == "O":
-        print("Player 2 wins!")
         return True
     # diagonals
     elif board[7] == "O" and board[5] == "O" and board[3] == "O":
-        print("Player 2 wins!")
         return True
     elif board[1] == "O" and board[5] == "O" and board[9] == "O":
-        print("Player 2 wins!")
         return True
     # no one has won
     else:
@@ -144,6 +128,247 @@ def checkWin(board):
 
 numberOfPossibleWins = 8
 winningPositions = numpy.array( [ [1,2,3],[4,5,6],[7,8,9],[7,4,1],[8,5,2],[9,6,3],[7,5,3],[1,5,9] ] )
+
+def check3row_player(board, mark):
+    # horizontals
+    if board[7] == mark and board[8] == mark and board[9] == mark:
+        return 100
+    elif board[4] == mark and board[5] == mark and board[6] == mark:
+        return 100
+    elif board[1] == mark and board[2] == mark and board[3] == mark:
+        return 100
+    # verticals
+    elif board[7] == mark and board[4] == mark and board[1] == mark:
+        return 100
+    elif board[8] == mark and board[5] == mark and board[2] == mark:
+        return 100
+    elif board[9] == mark and board[6] == mark and board[3] == mark:
+        return 100
+    # diagonals
+    elif board[7] == mark and board[5] == mark and board[3] == mark:
+        return 100
+    elif board[1] == mark and board[5] == mark and board[9] == mark:
+        return 100
+    else:
+        return 0
+
+def check3row_opponent(board, mark):
+    # horizontals
+    if board[7] == mark and board[8] == mark and board[9] == mark:
+        return -100
+    elif board[4] == mark and board[5] == mark and board[6] == mark:
+        return -100
+    elif board[1] == mark and board[2] == mark and board[3] == mark:
+        return -100
+    # verticals
+    elif board[7] == mark and board[4] == mark and board[1] == mark:
+        return -100
+    elif board[8] == mark and board[5] == mark and board[2] == mark:
+        return -100
+    elif board[9] == mark and board[6] == mark and board[3] == mark:
+        return -100
+    # diagonals
+    elif board[7] == mark and board[5] == mark and board[3] == mark:
+        return -100
+    elif board[1] == mark and board[5] == mark and board[9] == mark:
+        return -100
+    # no one has won
+    else:
+        return 0
+
+def check2row_player(board, mark):   # 2-in-a-row (1 empty cell)
+    if board[7] == mark and board[5] == mark and board[3] == " ":
+        return 10
+    elif board[8] == mark and board[5] == mark and board[2] == " ":
+        return 10
+    elif board[9] == mark and board[5] == mark and board[1] == " ":
+        return 10
+    elif board[6] == mark and board[5] == mark and board[4] == " ":
+        return 10
+    elif board[3] == mark and board[5] == mark and board[7] == " ":
+        return 10
+    elif board[2] == mark and board[5] == mark and board[8] == " ":
+        return 10
+    elif board[1] == mark and board[5] == mark and board[9] == " ":
+        return 10
+    elif board[4] == mark and board[5] == mark and board[6] == " ":
+        return 10
+    elif board[7] == mark and board[8] == mark and board[9] == " ":
+        return 10
+    elif board[7] == mark and board[4] == mark and board[1] == " ":
+        return 10
+    elif board[9] == mark and board[8] == mark and board[7] == " ":
+        return 10
+    elif board[9] == mark and board[6] == mark and board[3] == " ":
+        return 10
+    elif board[3] == mark and board[6] == mark and board[7] == " ":
+        return 10
+    elif board[3] == mark and board[2] == mark and board[1] == " ":
+        return 10
+    elif board[1] == mark and board[4] == mark and board[7] == " ":
+        return 10
+    else:
+        return 0
+
+def check2row_opponent(board, mark):
+    if board[7] == mark and board[5] == mark and board[3] == " ":
+        return -10
+    elif board[8] == mark and board[5] == mark and board[2] == " ":
+        return -10
+    elif board[9] == mark and board[5] == mark and board[1] == " ":
+        return -10
+    elif board[6] == mark and board[5] == mark and board[4] == " ":
+        return -10
+    elif board[3] == mark and board[5] == mark and board[7] == " ":
+        return -10
+    elif board[2] == mark and board[5] == mark and board[8] == " ":
+        return -10
+    elif board[1] == mark and board[5] == mark and board[9] == " ":
+        return -10
+    elif board[4] == mark and board[5] == mark and board[6] == " ":
+        return -10
+    elif board[7] == mark and board[8] == mark and board[9] == " ":
+        return -10
+    elif board[7] == mark and board[4] == mark and board[1] == " ":
+        return -10
+    elif board[9] == mark and board[8] == mark and board[7] == " ":
+        return -10
+    elif board[9] == mark and board[6] == mark and board[3] == " ":
+        return -10
+    elif board[3] == mark and board[6] == mark and board[7] == " ":
+        return -10
+    elif board[3] == mark and board[2] == mark and board[1] == " ":
+        return -10
+    elif board[1] == mark and board[4] == mark and board[7] == " ":
+        return -10
+    else:
+        return 0
+
+def check1row_player(board, mark):   # 1-in-a-row (2 empty cells)
+    if board[7] == mark and board[8] == " " and board[9] == " ":
+        return 1
+    elif board[7] == mark and board[5] == " " and board[6] == " ":
+        return 1
+    elif board[7] == mark and board[4] == " " and board[1] == " ":
+        return 1
+
+    elif board[8] == mark and board[7] == " " and board[9] == " ":
+        return 1
+    elif board[8] == mark and board[5] == " " and board[2] == " ":
+        return 1
+
+    elif board[9] == mark and board[8] == " " and board[7] == " ":
+        return 1
+    elif board[9] == mark and board[6] == " " and board[3] == " ":
+        return 1
+    elif board[9] == mark and board[5] == " " and board[1] == " ":
+        return 1
+
+    elif board[4] == mark and board[5] == " " and board[6] == " ":
+        return 1
+    elif board[4] == mark and board[7] == " " and board[1] == " ":
+        return 1
+
+    elif board[5] == mark and board[7] == " " and board[3] == " ":
+        return 1
+    elif board[5] == mark and board[9] == " " and board[1] == " ":
+        return 1
+    elif board[5] == mark and board[4] == " " and board[6] == " ":
+        return 1
+    elif board[5] == mark and board[8] == " " and board[2] == " ":
+        return 1
+
+    elif board[6] == mark and board[5] == " " and board[4] == " ":
+        return 1
+    elif board[6] == mark and board[9] == " " and board[3] == " ":
+        return 1
+
+    elif board[1] == mark and board[4] == " " and board[7] == " ":
+        return 1
+    elif board[1] == mark and board[5] == " " and board[9] == " ":
+        return 1
+    elif board[1] == mark and board[2] == " " and board[3] == " ":
+        return 1
+
+    elif board[2] == mark and board[5] == " " and board[9] == " ":
+        return 1
+    elif board[2] == mark and board[1] == " " and board[3] == " ":
+        return 1
+
+    elif board[3] == mark and board[6] == " " and board[9] == " ":
+        return 1
+    elif board[3] == mark and board[5] == " " and board[7] == " ":
+        return 1
+    elif board[3] == mark and board[2] == " " and board[1] == " ":
+        return 1
+    else:
+        return 0
+
+def row1check_opponent(board, mark):
+    if board[7] == mark and board[8] == " " and board[9] == " ":
+        return -1
+    elif board[7] == mark and board[5] == " " and board[6] == " ":
+        return -1
+    elif board[7] == mark and board[4] == " " and board[1] == " ":
+        return -1
+
+    elif board[8] == mark and board[7] == " " and board[9] == " ":
+        return -1
+    elif board[8] == mark and board[5] == " " and board[2] == " ":
+        return -1
+
+    elif board[9] == mark and board[8] == " " and board[7] == " ":
+        return -1
+    elif board[9] == mark and board[6] == " " and board[3] == " ":
+        return -1
+    elif board[9] == mark and board[5] == " " and board[1] == " ":
+        return -1
+
+    elif board[4] == mark and board[5] == " " and board[6] == " ":
+        return -1
+    elif board[4] == mark and board[7] == " " and board[1] == " ":
+        return -1
+
+    elif board[5] == mark and board[7] == " " and board[3] == " ":
+        return -1
+    elif board[5] == mark and board[9] == " " and board[1] == " ":
+        return -1
+    elif board[5] == mark and board[4] == " " and board[6] == " ":
+        return -1
+    elif board[5] == mark and board[8] == " " and board[2] == " ":
+        return -1
+
+    elif board[6] == mark and board[5] == " " and board[4] == " ":
+        return -1
+    elif board[6] == mark and board[9] == " " and board[3] == " ":
+        return -1
+
+    elif board[1] == mark and board[4] == " " and board[7] == " ":
+        return -1
+    elif board[1] == mark and board[5] == " " and board[9] == " ":
+        return -1
+    elif board[1] == mark and board[2] == " " and board[3] == " ":
+        return -1
+
+    elif board[2] == mark and board[5] == " " and board[9] == " ":
+        return -1
+    elif board[2] == mark and board[1] == " " and board[3] == " ":
+        return -1
+
+    elif board[3] == mark and board[6] == " " and board[9] == " ":
+        return -1
+    elif board[3] == mark and board[5] == " " and board[7] == " ":
+        return -1
+    elif board[3] == mark and board[2] == " " and board[1] == " ":
+        return -1
+    else:
+        return 0
+
+
+def evaluateScore(player):
+    if player == "AI":
+
+
 
 def minimax(board, alpha, beta, depth, limit):
     if checkWin(board) || checkTie(board):
@@ -169,28 +394,61 @@ board = [" "] * 10
 
 # prompt user to select player vs player OR player vs AI
 gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
+while gameType != "1" and gameType != "2":
+    gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
 
+# player vs player option
 if gameType == "1":
     while True:
-        if checkWin(board) == True:     # continue game if no one has won yet. Otherwise, end game
+        # check if game over
+        if checkWin(board) == True:
+            print("Game over!")
             break
-
-        if checkTie(board) == True:     # check if a tie has occured
+        if checkTie(board) == True:
             print("Tie game!")
             break
-        
-        resetBoard(board)               # reset the game board
-        placeTurn(board)                # prompt and place user's mark onto game board
-        turn += 1                       # incrememt the turn count
-
-        
+        # update board
+        resetBoard(board)
+        # prompt and place user's mark onto game board
+        placeTurn(board)
+        turn += 1
 
     # Display final state of game board
     resetBoard(board)
+
+# player vs AI option
 else:
-    print("Do you want to go first [Y/n]?")
-    playTurn = raw_input()
-    print("IMPLEMENT AI")
+    # print("Do you want to go first [Y/n]?")
+    # playTurn = raw_input()
+    # while playTurn != "Y" or playTurn != "y" or playTurn != "N" or playTurn != "n":
+    #     print("Do you want to go first [Y/n]?")
+    #     playTurn = raw_input()
+    
+    # implement AI
+
+    while True:
+        # check if game over
+        if checkWin(board) == True:
+            print("Game over!")
+            break
+        if checkTie(board) == True:
+            print("Tie game!")
+            break
+
+        # update board
+        resetBoard(board)
+
+        if turn % 2 == 0:   # user's turn
+            # prompt and place user's mark onto game board
+            placeTurn(board)
+            turn += 1
+        else:   # AI's turn
+            minimax(board, float("-inf"), float("inf"), 0, 2)
+            turn += 1
+
+    # Display final state of game board
+    resetBoard(board)
+
 
 
 
