@@ -129,7 +129,7 @@ def checkWin(board):
 numberOfPossibleWins = 8
 winningPositions = numpy.array( [ [1,2,3],[4,5,6],[7,8,9],[7,4,1],[8,5,2],[9,6,3],[7,5,3],[1,5,9] ] )
 
-def check3row_player(board, mark):
+def check3row_AI(board, mark):
     # horizontals
     if board[7] == mark and board[8] == mark and board[9] == mark:
         return 100
@@ -176,7 +176,7 @@ def check3row_opponent(board, mark):
     else:
         return 0
 
-def check2row_player(board, mark):   # 2-in-a-row (1 empty cell)
+def check2row_AI(board, mark):   # 2-in-a-row (1 empty cell)
     if board[7] == mark and board[5] == mark and board[3] == " ":
         return 10
     elif board[8] == mark and board[5] == mark and board[2] == " ":
@@ -244,7 +244,7 @@ def check2row_opponent(board, mark):
     else:
         return 0
 
-def check1row_player(board, mark):   # 1-in-a-row (2 empty cells)
+def check1row_AI(board, mark):   # 1-in-a-row (2 empty cells)
     if board[7] == mark and board[8] == " " and board[9] == " ":
         return 1
     elif board[7] == mark and board[5] == " " and board[6] == " ":
@@ -364,33 +364,90 @@ def row1check_opponent(board, mark):
     else:
         return 0
 
+# function to find all legal moves in board
+def findLegalMoves(board):
+    legalMoves = [None]
+    for i, val in enumerate(board):
+        if val == " ":
+            legalMoves.append(i)
+    return legalMoves
 
-def evaluateScore(player):
+# # simulate a board with possible move
+# def simulateBoard(board, move, mark):
+#     newBoard = board
+#     newBoard[move] = mark
+
+def evaluateScore(player, board):
+    bestScore = 0
+    # maximizer
     if player == "AI":
+        mark = "O"
+        score1 = check3row_AI(board, mark)
+        score2 = check2row_AI(board, mark)
+        score3 = check1row_AI(board, mark)
+        if score1 >= score2 and score1 >= score3:
+            bestScore = score1
+        elif score2 >= score1 and score2 >= score3:
+            bestScore = score2
+        elif score3 >= score1 and score3 >= score2:
+            bestScore = score3
+    # minimizer
+    else:   # player = "user"
+        mark = "X"
+        score1 = check3row_opponent(board, mark)
+        score2 = check2row_opponent(board, mark)
+        score3 = check1row_opponent(board, mark)
+        if score1 <= score2 and score1 <= score3:
+            bestScore = score1
+        elif score2 <= score1 and score2 <= score3:
+            bestScore = score2
+        elif score3 <= score1 and score3 <= score2:
+            bestScore = score3
+
+    return bestScore
 
 
-
-def minimax(board, alpha, beta, depth, limit):
-    if checkWin(board) || checkTie(board):
-        score = evaluateScore(board)
-        return score
+def minimax(board, player, alpha, beta, depth):
+    if checkWin(board) || checkTie(board) || depth == 0:
+        return evaluateScore(board)
     
+    legalMoves = findLegalMoves(board)
     # maximizer
     if player == "AI":
         bestScore = float("-inf")
+        for move in legalMoves:
+            score = minimax(board, "user", alpha, beta, depth-1)
+
 
     # minimizer
     else:
 
 
 
+# alpha-beta(player,board,alpha,beta)
+#     if(game over in current board position)
+#         return winner
 
+#     children = all legal moves for player from this board
+#     if(max's turn)
+#         for each child
+#             score = alpha-beta(other player,child,alpha,beta)
+#             if score > alpha then alpha = score (we have found a better best move)
+#             if alpha >= beta then return alpha (cut off)
+#         return alpha (this is our best move)
+#     else (min's turn)
+#         for each child
+#             score = alpha-beta(other player,child,alpha,beta)
+#             if score < beta then beta = score (opponent has found a better worse move)
+#             if alpha >= beta then return beta (cut off)
+#         return beta (this is the opponent's best move)
 
 
 # ---------------------------------------------------------------------------
 # initial settings for game board
 turn = 0
-board = [" "] * 10
+board = [" "] * 9
+board[0] = None
 
 # prompt user to select player vs player OR player vs AI
 gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
