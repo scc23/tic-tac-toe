@@ -388,7 +388,7 @@ def evaluateScore(player, board):
         if score1 >= score2 and score1 >= score3:
             bestScore = score1
         elif score2 >= score1 and score2 >= score3:
-            bestScore = score2
+            bestScore = score2q
         elif score3 >= score1 and score3 >= score2:
             bestScore = score3
     # minimizer
@@ -414,15 +414,26 @@ def minimax(board, player, alpha, beta, depth):
     legalMoves = findLegalMoves(board)
     # maximizer
     if player == "AI":
+        # find max and store in alpha
         bestScore = float("-inf")
         for move in legalMoves:
             score = minimax(board, "user", alpha, beta, depth-1)
-
-
+            if score > alpha:
+                alpha = score
+            if alpha >= beta:
+                break   # prune
+        return alpha
     # minimizer
-    else:
-
-
+    else:   # player == "user"
+        # find min and store in beta
+        bestScore = float("inf")
+        for move in legalMoves:
+            score = minimax(level-1, computer, alpha, beta)
+            if score < beta:
+                beta = score
+            if alpha >= beta:
+                break   # prune
+        return beta
 
 # alpha-beta(player,board,alpha,beta)
 #     if(game over in current board position)
