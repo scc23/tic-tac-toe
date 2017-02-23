@@ -39,7 +39,7 @@ def placeTurn(board):
         player  =   "2"
         mark    =   "O"
 
-    print("Player " + player + " turn")
+    print("Player " + player + "'s turn")
     position = raw_input("Please enter a position: ")   # prompt user for position
 
     # user input error check
@@ -304,7 +304,7 @@ def check1row_AI(board, mark):   # 1-in-a-row (2 empty cells)
     else:
         return 0
 
-def row1check_opponent(board, mark):
+def check1row_opponent(board, mark):
     if board[7] == mark and board[8] == " " and board[9] == " ":
         return -1
     elif board[7] == mark and board[5] == " " and board[6] == " ":
@@ -388,7 +388,7 @@ def evaluateScore(player, board):
         if score1 >= score2 and score1 >= score3:
             bestScore = score1
         elif score2 >= score1 and score2 >= score3:
-            bestScore = score2q
+            bestScore = score2
         elif score3 >= score1 and score3 >= score2:
             bestScore = score3
     # minimizer
@@ -404,12 +404,13 @@ def evaluateScore(player, board):
         elif score3 <= score1 and score3 <= score2:
             bestScore = score3
 
+    print bestScore
     return bestScore
 
 
 def minimax(board, player, alpha, beta, depth):
-    if checkWin(board) || checkTie(board) || depth == 0:
-        return evaluateScore(board)
+    if checkWin(board) or checkTie(board) or depth == 0:
+        return evaluateScore(player, board)
     
     legalMoves = findLegalMoves(board)
     # maximizer
@@ -428,7 +429,7 @@ def minimax(board, player, alpha, beta, depth):
         # find min and store in beta
         bestScore = float("inf")
         for move in legalMoves:
-            score = minimax(level-1, computer, alpha, beta)
+            score = minimax(board, "AI", alpha, beta, depth-1)
             if score < beta:
                 beta = score
             if alpha >= beta:
@@ -457,7 +458,7 @@ def minimax(board, player, alpha, beta, depth):
 # ---------------------------------------------------------------------------
 # initial settings for game board
 turn = 0
-board = [" "] * 9
+board = [" "] * 10
 board[0] = None
 
 # prompt user to select player vs player OR player vs AI
@@ -511,7 +512,8 @@ else:
             placeTurn(board)
             turn += 1
         else:   # AI's turn
-            minimax(board, float("-inf"), float("inf"), 0, 2)
+            print "AI's turn"
+            minimax(board, "AI", float("-inf"), float("inf"), 3)
             turn += 1
 
     # Display final state of game board
