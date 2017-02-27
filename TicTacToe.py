@@ -6,7 +6,7 @@
 ## Features:
 # Player vs player (player chooses positions based on keyboard"s keypad)
 # Player vs AI (alpha-beta pruning)
-# Choice of who goes first (X or O)
+# Player (X) goes first, AI (O) goes second
 ################################################################################
 
 import numpy
@@ -110,7 +110,8 @@ def checkWin(board, mark):
 
 
 
-# ---------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------
+# MAIN
 # initial settings for game board
 turn = 0
 board = [" "] * 10
@@ -144,7 +145,7 @@ if gameType == "1":
         turn += 1
 
 # player vs AI option
-# player goes first, AI goes second
+# player (X) goes first, AI (O) goes second
 else:
     while True:
         # update board
