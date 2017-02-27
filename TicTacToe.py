@@ -105,8 +105,79 @@ def checkWin(board, mark):
 # alpha-beta pruning minimax
 # http://catarak.github.io/blog/2015/01/07/solving-tic-tac-toe/
 
+# function to find all legal moves in board
+def findLegalMoves(board):
+    legalMoves = [None]
+    for i, val in enumerate(board):
+        if val == " ":
+            legalMoves.append(i)
+    return legalMoves
+
+# function to evaluate score
+def evaluateScore():
+
+# PROBLEM: must keep track of best move, (right now, only keeps track of best score)
+# AI minimax function
+def minimax(board, player, depth):
+    # if game over or depth is reached, return evaluated score
+    if checkWin(board, "X") or checkWin(board, "O") or depth == 0:
+        return evaluateScore
+
+    # find all possible moves
+    legalMoves = findLegalMoves(board)
+    # maximizing player
+    if player == "AI":
+        # initialize the best score to -infinity
+        bestScore = float("-inf")
+        # traverse through all the possible moves
+        for move in legalMoves:
+            if move != None:        # this is because our positions start at 1 not 0, so index 0 is None
+                score = minimax(board, "user", depth-1)
+                if (score > bestScore):
+                    bestScore = score
+                return bestScore
+    # minimizing player
+    else:
+        bestScore = float("inf")
+        for move in legalMoves:
+            if move != None:        # this is because our positions start at 1 not 0, so index 0 is None
+                score = minimax(board, "AI", depth-1)
+                if (score < bestScore):
+                    bestScore = score
+                return bestScore
 
 
+# PSEUDOCODE
+# --------------------------------------------------------------------------------
+# def minimax(depth, player)
+#   if gameover || depth == 0
+#     return calculated_score
+#   end
+#   children = all legal moves for player
+#   if player is AI (maximizing player)
+#     best_score = -infinity
+#     for each child
+#       score = minimax(depth - 1, opponent)
+#       if (score > best_score)
+#         best_score = score
+#       end
+#       return best_score
+#     end
+#   else #player is minimizing player
+#     best_score = +infinity
+#     for each child
+#       score = minimax(depth - 1, player)
+#       if (score < best_score)
+#         best_score = score
+#       end
+#       return best_score
+#     end
+#   end
+# end
+
+# #then you would call it like
+# minimax(2, computer)
+# --------------------------------------------------------------------------------
 
 
 
@@ -171,7 +242,14 @@ else:
         else:   # AI's turn
             print "AI's turn"
 
+            # make AI move
+            # -----------------------------------------
+            
+            minimax(board, "AI", 3)
 
+
+
+            # -----------------------------------------
 
             turn += 1
 
