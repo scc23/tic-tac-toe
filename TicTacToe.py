@@ -108,279 +108,6 @@ def checkWin(board, mark):
 # ----------------------------------------------------------------------------------------------------------------------------------
 # functions for AI
 
-def check3row_AI(board, mark):
-    # horizontals
-    if board[7] == mark and board[8] == mark and board[9] == mark:
-        return 100
-    elif board[4] == mark and board[5] == mark and board[6] == mark:
-        return 100
-    elif board[1] == mark and board[2] == mark and board[3] == mark:
-        return 100
-    # verticals
-    elif board[7] == mark and board[4] == mark and board[1] == mark:
-        return 100
-    elif board[8] == mark and board[5] == mark and board[2] == mark:
-        return 100
-    elif board[9] == mark and board[6] == mark and board[3] == mark:
-        return 100
-    # diagonals
-    elif board[7] == mark and board[5] == mark and board[3] == mark:
-        return 100
-    elif board[1] == mark and board[5] == mark and board[9] == mark:
-        return 100
-    else:
-        return 0
-
-def check3row_opponent(board, mark):
-    # horizontals
-    if board[7] == mark and board[8] == mark and board[9] == mark:
-        return -100
-    elif board[4] == mark and board[5] == mark and board[6] == mark:
-        return -100
-    elif board[1] == mark and board[2] == mark and board[3] == mark:
-        return -100
-    # verticals
-    elif board[7] == mark and board[4] == mark and board[1] == mark:
-        return -100
-    elif board[8] == mark and board[5] == mark and board[2] == mark:
-        return -100
-    elif board[9] == mark and board[6] == mark and board[3] == mark:
-        return -100
-    # diagonals
-    elif board[7] == mark and board[5] == mark and board[3] == mark:
-        return -100
-    elif board[1] == mark and board[5] == mark and board[9] == mark:
-        return -100
-    else:
-        return 0
-
-def check2row_AI(board, mark):   # 2-in-a-row (1 empty cell)
-    if board[7] == mark and board[5] == mark and board[3] == " ":
-        return 10
-    elif board[8] == mark and board[5] == mark and board[2] == " ":
-        return 10
-    elif board[9] == mark and board[5] == mark and board[1] == " ":
-        return 10
-    elif board[6] == mark and board[5] == mark and board[4] == " ":
-        return 10
-    elif board[3] == mark and board[5] == mark and board[7] == " ":
-        return 10
-    elif board[2] == mark and board[5] == mark and board[8] == " ":
-        return 10
-    elif board[1] == mark and board[5] == mark and board[9] == " ":
-        return 10
-    elif board[4] == mark and board[5] == mark and board[6] == " ":
-        return 10
-    elif board[7] == mark and board[8] == mark and board[9] == " ":
-        return 10
-    elif board[7] == mark and board[4] == mark and board[1] == " ":
-        return 10
-    elif board[9] == mark and board[8] == mark and board[7] == " ":
-        return 10
-    elif board[9] == mark and board[6] == mark and board[3] == " ":
-        return 10
-    elif board[3] == mark and board[6] == mark and board[7] == " ":
-        return 10
-    elif board[3] == mark and board[2] == mark and board[1] == " ":
-        return 10
-    elif board[1] == mark and board[4] == mark and board[7] == " ":
-        return 10
-    else:
-        return 0
-
-def check2row_opponent(board, mark):
-    if board[7] == mark and board[5] == mark and board[3] == " ":
-        return -10
-    elif board[8] == mark and board[5] == mark and board[2] == " ":
-        return -10
-    elif board[9] == mark and board[5] == mark and board[1] == " ":
-        return -10
-    elif board[6] == mark and board[5] == mark and board[4] == " ":
-        return -10
-    elif board[3] == mark and board[5] == mark and board[7] == " ":
-        return -10
-    elif board[2] == mark and board[5] == mark and board[8] == " ":
-        return -10
-    elif board[1] == mark and board[5] == mark and board[9] == " ":
-        return -10
-    elif board[4] == mark and board[5] == mark and board[6] == " ":
-        return -10
-    elif board[7] == mark and board[8] == mark and board[9] == " ":
-        return -10
-    elif board[7] == mark and board[4] == mark and board[1] == " ":
-        return -10
-    elif board[9] == mark and board[8] == mark and board[7] == " ":
-        return -10
-    elif board[9] == mark and board[6] == mark and board[3] == " ":
-        return -10
-    elif board[3] == mark and board[6] == mark and board[7] == " ":
-        return -10
-    elif board[3] == mark and board[2] == mark and board[1] == " ":
-        return -10
-    elif board[1] == mark and board[4] == mark and board[7] == " ":
-        return -10
-    else:
-        return 0
-
-def check1row_AI(board, mark):   # 1-in-a-row (2 empty cells)
-    if board[7] == mark and board[8] == " " and board[9] == " ":
-        return 1
-    elif board[7] == mark and board[5] == " " and board[6] == " ":
-        return 1
-    elif board[7] == mark and board[4] == " " and board[1] == " ":
-        return 1
-
-    elif board[8] == mark and board[7] == " " and board[9] == " ":
-        return 1
-    elif board[8] == mark and board[5] == " " and board[2] == " ":
-        return 1
-
-    elif board[9] == mark and board[8] == " " and board[7] == " ":
-        return 1
-    elif board[9] == mark and board[6] == " " and board[3] == " ":
-        return 1
-    elif board[9] == mark and board[5] == " " and board[1] == " ":
-        return 1
-
-    elif board[4] == mark and board[5] == " " and board[6] == " ":
-        return 1
-    elif board[4] == mark and board[7] == " " and board[1] == " ":
-        return 1
-
-    elif board[5] == mark and board[7] == " " and board[3] == " ":
-        return 1
-    elif board[5] == mark and board[9] == " " and board[1] == " ":
-        return 1
-    elif board[5] == mark and board[4] == " " and board[6] == " ":
-        return 1
-    elif board[5] == mark and board[8] == " " and board[2] == " ":
-        return 1
-
-    elif board[6] == mark and board[5] == " " and board[4] == " ":
-        return 1
-    elif board[6] == mark and board[9] == " " and board[3] == " ":
-        return 1
-
-    elif board[1] == mark and board[4] == " " and board[7] == " ":
-        return 1
-    elif board[1] == mark and board[5] == " " and board[9] == " ":
-        return 1
-    elif board[1] == mark and board[2] == " " and board[3] == " ":
-        return 1
-
-    elif board[2] == mark and board[5] == " " and board[9] == " ":
-        return 1
-    elif board[2] == mark and board[1] == " " and board[3] == " ":
-        return 1
-
-    elif board[3] == mark and board[6] == " " and board[9] == " ":
-        return 1
-    elif board[3] == mark and board[5] == " " and board[7] == " ":
-        return 1
-    elif board[3] == mark and board[2] == " " and board[1] == " ":
-        return 1
-    else:
-        return 0
-
-def check1row_opponent(board, mark):
-    if board[7] == mark and board[8] == " " and board[9] == " ":
-        return -1
-    elif board[7] == mark and board[5] == " " and board[6] == " ":
-        return -1
-    elif board[7] == mark and board[4] == " " and board[1] == " ":
-        return -1
-
-    elif board[8] == mark and board[7] == " " and board[9] == " ":
-        return -1
-    elif board[8] == mark and board[5] == " " and board[2] == " ":
-        return -1
-
-    elif board[9] == mark and board[8] == " " and board[7] == " ":
-        return -1
-    elif board[9] == mark and board[6] == " " and board[3] == " ":
-        return -1
-    elif board[9] == mark and board[5] == " " and board[1] == " ":
-        return -1
-
-    elif board[4] == mark and board[5] == " " and board[6] == " ":
-        return -1
-    elif board[4] == mark and board[7] == " " and board[1] == " ":
-        return -1
-
-    elif board[5] == mark and board[7] == " " and board[3] == " ":
-        return -1
-    elif board[5] == mark and board[9] == " " and board[1] == " ":
-        return -1
-    elif board[5] == mark and board[4] == " " and board[6] == " ":
-        return -1
-    elif board[5] == mark and board[8] == " " and board[2] == " ":
-        return -1
-
-    elif board[6] == mark and board[5] == " " and board[4] == " ":
-        return -1
-    elif board[6] == mark and board[9] == " " and board[3] == " ":
-        return -1
-
-    elif board[1] == mark and board[4] == " " and board[7] == " ":
-        return -1
-    elif board[1] == mark and board[5] == " " and board[9] == " ":
-        return -1
-    elif board[1] == mark and board[2] == " " and board[3] == " ":
-        return -1
-
-    elif board[2] == mark and board[5] == " " and board[9] == " ":
-        return -1
-    elif board[2] == mark and board[1] == " " and board[3] == " ":
-        return -1
-
-    elif board[3] == mark and board[6] == " " and board[9] == " ":
-        return -1
-    elif board[3] == mark and board[5] == " " and board[7] == " ":
-        return -1
-    elif board[3] == mark and board[2] == " " and board[1] == " ":
-        return -1
-    else:
-        return 0
-
-# function to evaluate score
-def evaluate(thisBoard, player):
-    bestScore = 0
-    # maximizer
-    if player == "AI":
-        # print "AI"      # TESTING
-        mark = "O"
-        score1 = check3row_AI(board, mark)
-        # print "score1: ", score1    # TESTING
-        score2 = check2row_AI(board, mark)
-        # print "score2: ", score2    # TESTING
-        score3 = check1row_AI(board, mark)
-        # print "score3: ", score3    # TESTING
-        if score1 >= score2 and score1 >= score3 and score1 >= bestScore:
-            bestScore = score1
-        elif score2 >= score1 and score2 >= score3 and score2 >= bestScore:
-            bestScore = score2
-        elif score3 >= score1 and score3 >= score2 and score3 >= bestScore:
-            bestScore = score3
-    # minimizer
-    else:   # player = "user"
-        # print "user"    # TESTING
-        mark = "X"
-        score1 = check3row_opponent(board, mark)
-        # print "score1: ", score1    # TESTING
-        score2 = check2row_opponent(board, mark)
-        # print "score2: ", score2    # TESTING
-        score3 = check1row_opponent(board, mark)
-        # print "score3: ", score3    # TESTING
-        if score1 <= score2 and score1 <= score3 and score1 <= bestScore:
-            bestScore = score1
-        elif score2 <= score1 and score2 <= score3 and score2 <= bestScore:
-            bestScore = score2
-        elif score3 <= score1 and score3 <= score2 and score3 <= bestScore:
-            bestScore = score3
-
-    # print "bestScore: ", bestScore     # TESTING
-    return bestScore
-
 # function to find all legal moves in current state of game board
 def findLegalMoves(thisBoard):
     legalMoves = [None]
@@ -389,109 +116,107 @@ def findLegalMoves(thisBoard):
             legalMoves.append(i)
     return legalMoves
 
-# functiont to simulate a board with possible move
-def simulateBoard(thisBoard, move, mark):
-    returnBoard = list(thisBoard)
-    returnBoard[move] = mark
-    return returnBoard
+# function to evaluate the score of a move
+def evaluate(thisBoard):
+    bestScore = 0;
+    currBoard = list(thisBoard)
+    # evaluate score for each of the 8 lines (3 rows, 3 columns, 2 diagonals)
+    bestScore += evaluateScore(currBoard, 1, 2, 3)   # row 1
+    bestScore += evaluateScore(currBoard, 4, 5, 6)   # row 2
+    bestScore += evaluateScore(currBoard, 7, 8, 9)   # row 3
+    bestScore += evaluateScore(currBoard, 1, 4, 7)   # col 1
+    bestScore += evaluateScore(currBoard, 2, 5, 8)   # col 2
+    bestScore += evaluateScore(currBoard, 3, 6, 9)   # col 3
+    bestScore += evaluateScore(currBoard, 1, 5, 9)   # diagonal 1
+    bestScore += evaluateScore(currBoard, 3, 5, 7)   # diagonal 2
+    return bestScore
 
-# minimax AI function
-# def minimax(thisBoard, player, depth):
-#     newBoard = list(thisBoard)
-#     if depth == 0:
-#         return evaluate(newBoard, player)
-#     # maximizer
-#     if player == "AI":
-#         bestScore = float("-inf")
-#         # find all legal moves
-#         legalMoves = findLegalMoves(newBoard)
-#         # iterate through all legal moves
-#         for move in legalMoves:
-#             if move != None:
-#                 # simulate move in board
-#                 simBoard = simulateBoard(newBoard, move, "O")
-#                 # resetBoard(simBoard)    # TESTING
-#                 # evaluate score of simulated move
-#                 score = minimax(simBoard, "user", depth-1)
-#                 if score > bestScore:
-#                     bestScore = score
-#         return bestScore
-#     # minimizer
-#     else:
-#         bestScore = float("inf")
-#         # find all legal
-#         legalMoves = findLegalMoves(newBoard)
-#         # iterate through all legal moves
-#         for move in legalMoves:
-#             if move != None:
-#                 # simulate move in board
-#                 simBoard = simulateBoard(newBoard, move, "X")
-#                 # resetBoard(simBoard)    # TESTING
-#                 # evaluate score of simulated move
-#                 score = minimax(simBoard, "AI", depth-1)
-#                 if score < bestScore:
-#                     bestScore = score
-#         return bestScore
+def evaluateScore(thisBoard, cell_1, cell_2, cell_3):
+    bestScore = 0
 
-# try to save the best move along with the best score
-def minimax(thisBoard, player, depth, move):
+    # first cell
+    if thisBoard[cell_1] == "O":    # if cell_1 is AI
+        bestScore = 1
+    elif thisBoard[cell_1] == "X":  # if cell_1 is user
+        bestScore = -1
+
+    # second cell
+    if thisBoard[cell_2] == "O":    # if cell_2 is AI
+        if bestScore == 1:                  # if cell_1 is AI
+            bestScore = 10
+        elif bestScore == -1:               # if cell_1 is user
+            return 0
+        else:                               # if cell_1 is empty
+            bestScore = 1
+    elif thisBoard[cell_2] == "X":  # if cell_2 is user
+        if bestScore == -1:                 # if cell_1 is user
+            bestScore = -10
+        elif bestScore == 1:                # if cell_1 is AI
+            return 0
+        else:                               # if cell_1 is empty
+            bestScore = -1
+
+    # third cell
+    if thisBoard[cell_3] == "O":    # if cell_3 is AI
+        if bestScore > 0:                   # if cell_1 and/or cell_2 is AI
+            bestScore *= 10
+        elif bestScore < 0:                 # if cell_1 and/or cell_2 is user
+            return 0
+        else:                               # if cell_1 and cell_2 are empty
+            bestScore = 1
+    elif thisBoard[cell_3] == "X":  # if cell_3 is user
+        if bestScore < 0:                   # if cell_1 and/or cell_2 is user
+            bestScore *= 10
+        elif bestScore < 0:                 # if cell_1 and/or cell_2 is AI
+            return 0
+        else:                               # cell_1 and cell_2 are empty
+            bestScore = -1
+
+    return bestScore
+
+# function for minimax AI
+def minimax(thisBoard, player, depth):
     newBoard = list(thisBoard)
-    # if depth == 0 or checkWin(newBoard, "X") or checkWin(newBoard, "O") or checkTie(newBoard):
-    #     best = (evaluate(newBoard, player), move)
-    #     return best
-    
-    if depth == 0:
-        best = (evaluate(newBoard, player), move)
-        return best
+    legalMoves = findLegalMoves(newBoard)
+    del legalMoves[0]   # delete first index. This is because it is None since we start the positions of the cells at index 1
 
-    # maximizer
+    # initialize and set necessary variables
+    bestScore = 0
+    mark = ""
     if player == "AI":
-        bestScore = (float("-inf"), 0)
-        # find all legal moves
-        legalMoves = findLegalMoves(newBoard)
-        # remove None in index 0
-        del legalMoves[0]
-        # print "AI legal moves: ", legalMoves
-        # iterate through all legal moves
-        for move in legalMoves:
-            # print "move: ", move
-            # simulate move in board
-            simBoard = simulateBoard(newBoard, move, "O")
-            # print "AI POSSIBLE MOVE BOARD"    # TESTING
-            # resetBoard(simBoard)    # TESTING
-            # evaluate score of simulated move
-            score = minimax(simBoard, "user", depth-1, move)
-            # print score     # TESTING
-            if score[0] > bestScore[0]:
-                bestScore = score
-        return bestScore
-    # minimizer
+        bestScore = float("-inf")
+        mark = "O"
     else:
-        bestScore = (float("inf"), 0)
-        # find all legal
-        legalMoves = findLegalMoves(newBoard)
-        # remove None in index 0
-        del legalMoves[0]
-        print "user legal moves: ", legalMoves
-        # iterate through all legal moves
-        for move in legalMoves:
-            print "move: ", move
-            # simulate move in board
-            simBoard = simulateBoard(newBoard, move, "X")
-            print "USER POSSIBLE MOVE BOARD"    # TESTING
-            resetBoard(simBoard)    # TESTING
-            # evaluate score of simulated move
-            score = minimax(simBoard, "AI", depth-1, move)
-            # print score     # TESTING
-            if score[0] < bestScore[0]:
-                bestScore = score
-                print "user bestScore: ", bestScore
-        return bestScore
+        bestScore = float("inf")
+        mark = "X"
+    currentScore = 0
+    bestMove = -1
 
-def AI_bestMove(thisBoard, player, depth, move):
-    localBoard = list(thisBoard)
-    bestMove = minimax(localBoard, player, depth, move)[1]
-    return bestMove
+    # if the game is over or the depth is reached
+    if not legalMoves or depth == 0:
+        bestScore = evaluate(newBoard)
+    else:
+        # iterate through all possible legal moves
+        for move in legalMoves:
+            # simulate the move in the game board
+            newBoard[move] = mark
+
+            # maximizer
+            if player == "AI":
+                currentScore = minimax(newBoard, "user", depth-1)[0]
+                if currentScore > bestScore:
+                    bestScore = currentScore
+                    bestMove = move
+            # minimizer
+            else:
+                currentScore = minimax(newBoard, "AI", depth-1)[0]
+                if currentScore < bestScore:
+                    bestScore = currentScore
+                    bestMove = move
+            # undo the move and revert back to original state of game board
+            newBoard[move] = " "
+    return (bestScore, bestMove)
+
 # ----------------------------------------------------------------------------------------------------------------------------------
 # MAIN
 # initial settings for game board
@@ -551,25 +276,10 @@ else:
             turn += 1
         else:   # AI's turn
             print "AI's turn"
-
-            # make AI move
-            # -----------------------------------------
-            # minimax(thisBoard, player, depth)
-            # minimax(board, "AI", 3)
-            # print AI_bestMove(board, "AI", 3)
-            board[AI_bestMove(board, "AI", 3, 0)] = "O";
-
-
-            # -----------------------------------------
-
+            # call minimax AI function; minimax(thisBoard, player, depth)
+            AI_move = minimax(board, "AI", 3)[1]    # index 0 is the score, index 1 is the move
+            # make the best AI move
+            board[AI_move] = "O"
             turn += 1
 
-
-
-
-
-
-
-
-
-
+            
