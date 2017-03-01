@@ -137,13 +137,13 @@ def evaluate(thisBoard):
     return bestScore
 
 # function to evaluate heuristics
-# 3-in-a-row for AI: +100
-# 2-in-a-row for AI: +10
-# 1-in-a-row for AI: +1
-# 3-in-a-row for User: -100
-# 2-in-a-row for User: -10
-# 1-in-a-row for User: -1
-# Otherwise: 0
+    # 3-in-a-row for AI: +100
+    # 2-in-a-row for AI: +10
+    # 1-in-a-row for AI: +1
+    # 3-in-a-row for User: -100
+    # 2-in-a-row for User: -10
+    # 1-in-a-row for User: -1
+    # Otherwise: 0
 def evaluateScore(thisBoard, cell_1, cell_2, cell_3):
     bestScore = 0
 
@@ -214,16 +214,20 @@ def minimax(thisBoard, player, depth):
         for move in legalMoves:
             # simulate the move in the game board
             newBoard[move] = mark
-
+            # resetBoard(newBoard)                                # TESTING
             # maximizer
             if player == "AI":
                 currentScore = minimax(newBoard, "user", depth-1)[0]
+                # print "[AI]\tcurrentscore:\t", currentScore     # TESTING
+                # print "[user]\tbestScore:\t", bestScore         # TESTING
                 if currentScore > bestScore:
                     bestScore = currentScore
                     bestMove = move
             # minimizer
             else:
                 currentScore = minimax(newBoard, "AI", depth-1)[0]
+                # print "[AI]\tcurrentscore:\t", currentScore     # TESTING
+                # print "[user]\tbestScore:\t", bestScore         # TESTING
                 if currentScore < bestScore:
                     bestScore = currentScore
                     bestMove = move
@@ -239,7 +243,13 @@ board = [" "] * 10
 board[0] = None
 
 # prompt user to select player vs player OR player vs AI
-gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
+print("\nTic-Tac-Toe\n")
+print("Menu:")
+print("---------------------")
+print("\n(1) Player VS Player")
+print("(2) Player VS AI\n")
+print("---------------------\n")
+gameType = raw_input("Game type: ")
 while gameType != "1" and gameType != "2":
     gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
 
@@ -248,7 +258,6 @@ if gameType == "1":
     while True:
         # update board
         resetBoard(board)
-
         # check if game over
         if checkWin(board, "X"):
             print("Player 1 wins!")
@@ -257,6 +266,7 @@ if gameType == "1":
         elif checkWin(board, "O"):
             print("Player 2 wins!")
             print("Game over!")
+            break
         elif checkTie(board):
             print("Tie game!")
             break
@@ -276,11 +286,11 @@ else:
             print("You lose.")
             print("Game over!")
             break
-        if checkWin(board, "X"):
+        elif checkWin(board, "X"):
             print("You win.")
             print("Game over!")
             break
-        if checkTie(board):
+        elif checkTie(board):
             print("Tie game!")
             break
 
