@@ -113,6 +113,7 @@ def findLegalMoves(thisBoard):
     legalMoves = [None]
     for i, val in enumerate(thisBoard):
         if val == " ":
+            # add position to list if the cell is empty
             legalMoves.append(i)
     return legalMoves
 
@@ -121,16 +122,28 @@ def evaluate(thisBoard):
     bestScore = 0;
     currBoard = list(thisBoard)
     # evaluate score for each of the 8 lines (3 rows, 3 columns, 2 diagonals)
+    # horizontals
     bestScore += evaluateScore(currBoard, 1, 2, 3)   # row 1
     bestScore += evaluateScore(currBoard, 4, 5, 6)   # row 2
     bestScore += evaluateScore(currBoard, 7, 8, 9)   # row 3
+    # verticals
     bestScore += evaluateScore(currBoard, 1, 4, 7)   # col 1
     bestScore += evaluateScore(currBoard, 2, 5, 8)   # col 2
     bestScore += evaluateScore(currBoard, 3, 6, 9)   # col 3
+    # digaonals
     bestScore += evaluateScore(currBoard, 1, 5, 9)   # diagonal 1
     bestScore += evaluateScore(currBoard, 3, 5, 7)   # diagonal 2
+
     return bestScore
 
+# function to evaluate heuristics
+# 3-in-a-row for AI: +100
+# 2-in-a-row for AI: +10
+# 1-in-a-row for AI: +1
+# 3-in-a-row for User: -100
+# 2-in-a-row for User: -10
+# 1-in-a-row for User: -1
+# Otherwise: 0
 def evaluateScore(thisBoard, cell_1, cell_2, cell_3):
     bestScore = 0
 
@@ -177,6 +190,7 @@ def evaluateScore(thisBoard, cell_1, cell_2, cell_3):
 # function for minimax AI
 def minimax(thisBoard, player, depth):
     newBoard = list(thisBoard)
+    # find all legal moves and store them in list
     legalMoves = findLegalMoves(newBoard)
     del legalMoves[0]   # delete first index. This is because it is None since we start the positions of the cells at index 1
 
@@ -282,4 +296,3 @@ else:
             board[AI_move] = "O"
             turn += 1
 
-            
