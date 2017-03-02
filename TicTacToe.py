@@ -9,14 +9,10 @@
 # Player (X) goes first, AI (O) goes second
 ################################################################################
 
-# from Tkinter import *
-
-# root = Tk()
-# root.title("Tic Tac Toe")
-# root.geometry("300x300")
-# # root.mainloop()
-
-# click = True
+from Tkinter import *
+import tkFont
+import tkMessageBox
+import random
 
 # function to reset the game board
 def resetBoard(board):
@@ -106,6 +102,116 @@ def checkWin(board, mark):
         return True
     else:
         return False
+
+# ----------------------------------------------------------------------------------------------------------------------------------
+# functions for GUI
+
+# message boxes for  player vs player
+def player1Win():
+    tkMessageBox.showinfo("Game Over", "Player 1 wins!")
+
+def player2Win():
+    tkMessageBox.showinfo("Game Over", "Player 2 wins!")
+
+# message boxes player vs AI
+def winMessage():
+    tkMessageBox.showinfo("Game Over", "You win!")
+
+def loseMessage():
+    tkMessageBox.showinfo("Game Over", "You lose!")
+
+def tieMessage():
+    tkMessageBox.showinfo("Game Over", "Tie game!")
+
+def updateGUI(thisBoard):
+    buttonPlayer.grid_forget()
+    buttonAI.grid_forget()
+    # check for empty cell
+    if thisBoard[1] == " ":
+        button1 = Button(root, text=" ", width=13, height=6)
+        button1.grid(row=3, column=1)
+    if thisBoard[2] == " ":
+        button2 = Button(root, text=" ", width=13, height=6)
+        button2.grid(row=3, column=2)
+    if thisBoard[3] == " ":
+        button3 = Button(root, text=" ", width=13, height=6)
+        button3.grid(row=3, column=3)
+    if thisBoard[4] == " ":
+        button4 = Button(root, text=" ", width=13, height=6)
+        button4.grid(row=2, column=1)
+    if thisBoard[5] == " ":
+        button5 = Button(root, text=" ", width=13, height=6)
+        button5.grid(row=2, column=2)
+    if thisBoard[6] == " ":
+        button6 = Button(root, text=" ", width=13, height=6)
+        button6.grid(row=2, column=3)
+    if thisBoard[7] == " ":
+        button7 = Button(root, text=" ", width=13, height=6)
+        button7.grid(row=1, column=1)
+    if thisBoard[8] == " ":
+        button8 = Button(root, text=" ", width=13, height=6)
+        button8.grid(row=1, column=2)
+    if thisBoard[9] == " ":
+        button9 = Button(root, text=" ", width=13, height=6)
+        button9.grid(row=1, column=3)
+
+    # check for "X"
+    if thisBoard[1] == "X":
+        button1 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button1.grid(row=3, column=1)
+    if thisBoard[2] == "X":
+        button2 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button2.grid(row=3, column=2)
+    if thisBoard[3] == "X":
+        button3 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button3.grid(row=3, column=3)
+    if thisBoard[4] == "X":
+        button4 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button4.grid(row=2, column=1)
+    if thisBoard[5] == "X":
+        button5 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button5.grid(row=2, column=2)
+    if thisBoard[6] == "X":
+        button6 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button6.grid(row=2, column=3)
+    if thisBoard[7] == "X":
+        button7 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button7.grid(row=1, column=1)
+    if thisBoard[8] == "X":
+        button8 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button8.grid(row=1, column=2)
+    if thisBoard[9] == "X":
+        button9 = Button(root, text="X", state=DISABLED, width=3, height=0, font=customFont)
+        button9.grid(row=1, column=3)
+
+    # check for "O"
+    if thisBoard[1] == "O":
+        button1 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button1.grid(row=3, column=1)
+    if thisBoard[2] == "O":
+        button2 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button2.grid(row=3, column=2)
+    if thisBoard[3] == "O":
+        button3 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button3.grid(row=3, column=3)
+    if thisBoard[4] == "O":
+        button4 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button4.grid(row=2, column=1)
+    if thisBoard[5] == "O":
+        button5 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button5.grid(row=2, column=2)
+    if thisBoard[6] == "O":
+        button6 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button6.grid(row=2, column=3)
+    if thisBoard[7] == "O":
+        button7 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button7.grid(row=1, column=1)
+    if thisBoard[8] == "O":
+        button8 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button8.grid(row=1, column=2)
+    if thisBoard[9] == "O":
+        button9 = Button(root, text="O", state=DISABLED, width=3, height=0, font=customFont)
+        button9.grid(row=1, column=3)
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # functions for AI
@@ -237,6 +343,14 @@ def minimax(thisBoard, player, depth):
             newBoard[move] = " "
     return (bestScore, bestMove)
 
+# function for easy mode AI, make a random move
+def easyMode(thisBoard):
+    # find all possible legal moves
+    legalMoves = findLegalMoves(thisBoard)
+    del legalMoves[0]   # delete first index. This is because it is None since we start the positions of the cells at index 1
+    # print "AI legalMoves: ", legalMoves                         # TESTING
+    return random.choice(legalMoves)
+
 # ----------------------------------------------------------------------------------------------------------------------------------
 # MAIN
 # initial settings for game board
@@ -244,32 +358,60 @@ turn = 0
 board = [" "] * 10
 board[0] = None
 
+# GUI setup
+# -----------------------------------------------------------------------------
+root = Tk()
+root.title("Tic-Tac-Toe")
+root.geometry("310x310")
+root.minsize(310, 310)
+
+# GUI menu
+customFont = tkFont.Font(family="Helvetica", size=36, weight=tkFont.BOLD)
+menuFont = tkFont.Font(family="Helvetica", size=20)
+# display the game menu
+buttonPlayer = Button(root, text="Player vs Player", width=15, height=3, font=menuFont)
+buttonAI = Button(root, text="Player vs AI", width=15, height=3, font=menuFont)
+buttonPlayer.grid(row=1, column=1)
+buttonAI.grid(row=2,column=1)
+root.grid_rowconfigure(0, weight=1)
+root.grid_rowconfigure(4, weight=1)
+root.grid_columnconfigure(0, weight=1)
+root.grid_columnconfigure(4, weight=1)
+
+# -----------------------------------------------------------------------------
+
 # prompt user to select player vs player OR player vs AI
 print("\nTic-Tac-Toe\n")
-print("Menu:")
+print("Main Menu:")
 print("---------------------")
-print("\n(1) Player VS Player")
-print("\n(2) Player VS AI\n")
+print("\n[1] Player VS Player")
+print("\n[2] Player VS AI\n")
 print("---------------------\n")
 gameType = raw_input("Game type: ")
+# invalid input error check
 while gameType != "1" and gameType != "2":
-    gameType = raw_input("Enter '1' for Player VS Player, Enter '2' for Player VS AI: ")
+    print("Invalid input, please try again.")
+    gameType = raw_input("Game type: ")
 
 # player vs player option
 if gameType == "1":
     while True:
         # update board
         resetBoard(board)
+        updateGUI(board)
         # check if game over
         if checkWin(board, "X"):
+            player1Win()
             print("Player 1 wins!")
             print("Game over!")
             break
         elif checkWin(board, "O"):
+            player2Win()
             print("Player 2 wins!")
             print("Game over!")
             break
         elif checkTie(board):
+            tieMessage()
             print("Tie game!")
             break
         
@@ -279,20 +421,36 @@ if gameType == "1":
 
 # player vs AI option
 # player (X) goes first, AI (O) goes second
-else:
+elif gameType == "2":
+    print("\nDifficulty Options:")
+    print("---------------------")
+    print("\n[1] Easy")
+    print("\n[2] Normal")
+    print("\n[3] Hard\n")
+    print("---------------------\n")
+    difficulty = raw_input("Difficulty: ")
+    # invalid input error check
+    while difficulty != "1" and difficulty != "2" and difficulty != "3":
+        print("Invalid input, please try again.")
+        gameType = raw_input("Difficulty: ")
+
     while True:
         # update board
         resetBoard(board)
+        updateGUI(board)
         # check if game over
         if checkWin(board, "O"):
+            loseMessage()
             print("You lose.")
             print("Game over!")
             break
         elif checkWin(board, "X"):
+            winMessage()
             print("You win.")
             print("Game over!")
             break
         elif checkTie(board):
+            tieMessage()
             print("Tie game!")
             break
 
@@ -302,9 +460,17 @@ else:
             turn += 1
         else:   # AI's turn
             print "AI's turn"
-            # call minimax AI function; minimax(thisBoard, player, depth)
-            AI_move = minimax(board, "AI", 2)[1]    # index 0 is the score, index 1 is the move
+            
+            if difficulty == "1":
+                AI_move = easyMode(board)
+                # print "easy mode AI move: ", AI_move              # TESTING
+            else:
+                # call minimax AI function; minimax(thisBoard, player, depth)
+                AI_move = minimax(board, "AI", int(difficulty))[1]    # index 0 is the score, index 1 is the move
+            
             # make the best AI move
             board[AI_move] = "O"
             turn += 1
 
+# keep GUI window open until user closes it
+root.mainloop()
