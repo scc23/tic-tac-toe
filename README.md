@@ -1,5 +1,4 @@
 # tic-tac-toe
-Tic-Tac-Toe game with GUI and AI
+Tic-Tac-Toe game with GUI and AI using minimax algorithm
 
-AI in progress
 GUI in progress

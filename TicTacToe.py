@@ -14,7 +14,9 @@
 # root = Tk()
 # root.title("Tic Tac Toe")
 # root.geometry("300x300")
-# root.mainloop()
+# # root.mainloop()
+
+# click = True
 
 # function to reset the game board
 def resetBoard(board):
@@ -247,7 +249,7 @@ print("\nTic-Tac-Toe\n")
 print("Menu:")
 print("---------------------")
 print("\n(1) Player VS Player")
-print("(2) Player VS AI\n")
+print("\n(2) Player VS AI\n")
 print("---------------------\n")
 gameType = raw_input("Game type: ")
 while gameType != "1" and gameType != "2":
@@ -301,7 +303,7 @@ else:
         else:   # AI's turn
             print "AI's turn"
             # call minimax AI function; minimax(thisBoard, player, depth)
-            AI_move = minimax(board, "AI", 3)[1]    # index 0 is the score, index 1 is the move
+            AI_move = minimax(board, "AI", 2)[1]    # index 0 is the score, index 1 is the move
             # make the best AI move
             board[AI_move] = "O"
             turn += 1
