@@ -19,5 +19,5 @@ Difficulty Options:
 
 Gameplay:
 
+![solarized palette](https://github.com/scc23/tic-tac-toe/blob/master/screenshots/messageBox.png)
 ![solarized palette](https://github.com/scc23/tic-tac-toe/blob/master/screenshots/gameplay.png)
-![solarized palette](https://github.com/scc23/tic-tac-toe/blob/master/screenshots/tieMessageBox.png)
