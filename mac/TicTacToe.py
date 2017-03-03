@@ -4,7 +4,7 @@
 # Author: Sherman Chow
 #
 ## Features:
-# Player vs player (player chooses positions based on keyboard"s keypad)
+# Player vs player
 # Player vs AI (minimax)
 # Player (X) goes first, AI (O) goes second
 ################################################################################
