@@ -1,12 +1,12 @@
-# tic-tac-toe
-Tic-Tac-Toe game
+# Tic-Tac-Toe
 
-Includes:
+## Features
 - GUI
 - AI (minimax algorithm)
 - Player vs Player
 - Player vs AI (multiple difficulties)
 
+## Screenshots
 Main Menu:
 
 ![solarized palette](https://github.com/scc23/tic-tac-toe/blob/master/screenshots/mainMenu.png)
